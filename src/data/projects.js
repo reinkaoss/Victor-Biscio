@@ -1,11 +1,12 @@
 import { Code, Globe, Layout, Columns, BarChart, ShoppingCart } from 'lucide-react';
+import { Image } from "../src/images/timesheet.png;""
 
 export const projectsData = [
     {
     id: 1,
     title: "Timesheet Management System",
     description: "A modern, full-featured timesheet and brand ambassador management platform built with React and Vite.",
-    image: "/images/timesheet.png",
+    image: {Image},
     category: "web",
     technologies: ["React", "Vite", "Supabase"],
     github: "https://github.com/reinkaoss/timesheet-platform",
