@@ -1,5 +1,5 @@
 import { Code, Globe, Layout, Columns, BarChart, ShoppingCart } from 'lucide-react';
-import { Image } from "../src/images/timesheet.png;""
+import { Image } from "../src/images/timesheet.png;"
 
 export const projectsData = [
     {
