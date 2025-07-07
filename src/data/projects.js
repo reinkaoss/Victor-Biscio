@@ -5,9 +5,9 @@ export const projectsData = [
     id: 1,
     title: "Timesheet Management System",
     description: "A modern, full-featured timesheet and brand ambassador management platform built with React and Vite.",
-    image: "../src/images/timesheet.png",
+    image: "/images/timesheet.png",
     category: "web",
-    technologies: ["React", "Node.js", "MongoDB", "Stripe"],
+    technologies: ["React", "Vite", "Supabase"],
     github: "https://github.com/reinkaoss/timesheet-platform",
     complexity: "Complex",
     icon: ShoppingCart
