@@ -1,7 +1,12 @@
 import React from 'react';
 import { ExternalLink, Github, Layers } from 'lucide-react';
+import { Project } from '../data/projects';
 
-const ProjectCard = ({ project }) => {
+interface ProjectCardProps {
+  project: Project;
+}
+
+const ProjectCard: React.FC<ProjectCardProps> = ({ project }) => {
   return (
     <div 
       className="bg-white dark:bg-gray-900 rounded-xl overflow-hidden shadow-md hover:shadow-lg transition-all duration-300 transform hover:-translate-y-1 group"
@@ -14,7 +19,7 @@ const ProjectCard = ({ project }) => {
         />
         <div className="absolute inset-0 bg-gradient-to-t from-black/70 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-end">
           <div className="p-4 w-full">
-            <span className="inline-block px-3 py-1 bg-blue-600 text-white text-xs font-medium rounded-full mb-2">
+            <span className="inline-block px-3 py-1 bg-accent text-white dark:text-gray-900 text-xs font-medium rounded-full mb-2 capitalize">
               {project.category}
             </span>
           </div>
@@ -42,7 +47,7 @@ const ProjectCard = ({ project }) => {
               href={project.github} 
               target="_blank"
               rel="noopener noreferrer"
-              className="text-gray-700 dark:text-gray-300 hover:text-blue-600 dark:hover:text-blue-400 transition-colors"
+              className="text-gray-700 dark:text-gray-300 hover:text-accent transition-colors"
               aria-label="View source code on GitHub"
             >
               <Github size={20} />
@@ -52,7 +57,7 @@ const ProjectCard = ({ project }) => {
                 href={project.demo} 
                 target="_blank"
                 rel="noopener noreferrer"
-                className="text-gray-700 dark:text-gray-300 hover:text-blue-600 dark:hover:text-blue-400 transition-colors"
+                className="text-gray-700 dark:text-gray-300 hover:text-accent transition-colors"
                 aria-label="View live demo"
               >
                 <ExternalLink size={20} />

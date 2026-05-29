@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { Menu, X, Sun, Moon, Github } from 'lucide-react';
 import { useTheme } from '../context/ThemeContext';
 
-const Navbar = () => {
+const Navbar: React.FC = () => {
   const [isOpen, setIsOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
   const { theme, toggleTheme } = useTheme();
@@ -38,11 +38,11 @@ const Navbar = () => {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex justify-between h-16 items-center">
           <div className="flex items-center">
-            <a 
-              href="#" 
-              className="text-blue-600 dark:text-blue-400 font-bold text-xl flex items-center"
+            <a
+              href="#home"
+              className="text-accent font-bold text-xl flex items-center"
             >
-              <span className="mr-2">Portfolio</span>
+              <span className="mr-2">Victor Biscio</span>
             </a>
           </div>
           
@@ -51,13 +51,13 @@ const Navbar = () => {
               <a
                 key={link.name}
                 href={link.href}
-                className="px-3 py-2 text-gray-700 dark:text-gray-300 hover:text-blue-600 dark:hover:text-blue-400 transition-colors duration-300"
+                className="px-3 py-2 text-gray-700 dark:text-gray-300 hover:text-accent transition-colors duration-300"
               >
                 {link.name}
               </a>
             ))}
-            
-            <a href="https://github.com" target="_blank" rel="noopener noreferrer" className="text-gray-700 dark:text-gray-300 hover:text-blue-600 dark:hover:text-blue-400 transition-colors">
+
+            <a href="https://github.com/reinkaoss" target="_blank" rel="noopener noreferrer" className="text-gray-700 dark:text-gray-300 hover:text-accent transition-colors">
               <Github size={20} />
             </a>
             
@@ -81,7 +81,7 @@ const Navbar = () => {
             
             <button
               onClick={() => setIsOpen(!isOpen)}
-              className="text-gray-700 dark:text-gray-300 hover:text-blue-600 dark:hover:text-blue-400"
+              className="text-gray-700 dark:text-gray-300 hover:text-accent"
               aria-label="Toggle menu"
             >
               {isOpen ? <X size={24} /> : <Menu size={24} />}
@@ -90,6 +90,7 @@ const Navbar = () => {
         </div>
       </div>
       
+      {/* Mobile menu */}
       <div 
         className={`md:hidden transition-all duration-300 ease-in-out ${
           isOpen ? 'max-h-60 opacity-100' : 'max-h-0 opacity-0 invisible'
@@ -100,17 +101,18 @@ const Navbar = () => {
             <a
               key={link.name}
               href={link.href}
-              className="block px-3 py-2 rounded-md text-base font-medium text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700 hover:text-blue-600 dark:hover:text-blue-400"
+              className="block px-3 py-2 rounded-md text-base font-medium text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700 hover:text-accent"
               onClick={() => setIsOpen(false)}
             >
               {link.name}
             </a>
           ))}
-          <a 
-            href="https://github.com" 
-            target="_blank" 
-            rel="noopener noreferrer" 
-            className="flex items-center px-3 py-2 rounded-md text-base font-medium text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700 hover:text-blue-600 dark:hover:text-blue-400"
+          <a
+            href="https://github.com/reinkaoss"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="flex items-center px-3 py-2 rounded-md text-base font-medium text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700 hover:text-accent"
+            onClick={() => setIsOpen(false)}
           >
             <Github size={20} className="mr-2" /> GitHub
           </a>

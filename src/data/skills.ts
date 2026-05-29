@@ -1,6 +1,17 @@
 import { Code, FileCode, Globe, Server, Video, Workflow, Zap } from 'lucide-react';
 
-export const skillsData = [
+interface Skill {
+  name: string;
+  level: number;
+  icon: React.FC;
+}
+
+interface SkillCategory {
+  name: string;
+  skills: Skill[];
+}
+
+export const skillsData: SkillCategory[] = [
   {
     name: "Development Skills",
     skills: [

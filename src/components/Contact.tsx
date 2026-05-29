@@ -1,32 +1,30 @@
 import React, { useState } from 'react';
 import { Send, Mail, MapPin, Linkedin } from 'lucide-react';
 
-const Contact = () => {
+const Contact: React.FC = () => {
   const [formData, setFormData] = useState({
     name: '',
     email: '',
     message: '',
   });
   
-  const [isSubmitting, setIsSubmitting] = useState(false);
   const [submitted, setSubmitted] = useState(false);
-  
-  const handleChange = (e) => {
+
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
     const { name, value } = e.target;
     setFormData(prev => ({ ...prev, [name]: value }));
   };
-  
-  const handleSubmit = (e) => {
+
+  const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    setIsSubmitting(true);
-    
-    setTimeout(() => {
-      setIsSubmitting(false);
-      setSubmitted(true);
-      setFormData({ name: '', email: '', message: '' });
-      
-      setTimeout(() => setSubmitted(false), 5000);
-    }, 1500);
+
+    const subject = encodeURIComponent(`Portfolio enquiry from ${formData.name}`);
+    const body = encodeURIComponent(`${formData.message}\n\n— ${formData.name} (${formData.email})`);
+    window.location.href = `mailto:victorbiscio1@hotmail.com?subject=${subject}&body=${body}`;
+
+    setSubmitted(true);
+    setFormData({ name: '', email: '', message: '' });
+    setTimeout(() => setSubmitted(false), 8000);
   };
 
   return (
@@ -85,7 +83,10 @@ const Contact = () => {
             
             {submitted ? (
               <div className="success-message">
-                <p>Thanks for your message! I'll get back to you soon.</p>
+                <p>
+                  Your email client should have opened with the message ready &mdash; just hit send.
+                  If it didn't, email me directly at victorbiscio1@hotmail.com.
+                </p>
               </div>
             ) : (
               <form onSubmit={handleSubmit}>
@@ -125,22 +126,11 @@ const Contact = () => {
                   ></textarea>
                 </div>
                 
-                <button
-                  type="submit"
-                  disabled={isSubmitting}
-                  className="submit-btn"
-                >
-                  {isSubmitting ? (
-                    <span className="loading">
-                      <span className="loading-spinner"></span>
-                      Sending...
-                    </span>
-                  ) : (
-                    <span className="btn-content">
-                      <Send size={18} />
-                      Send Message
-                    </span>
-                  )}
+                <button type="submit" className="submit-btn">
+                  <span className="btn-content">
+                    <Send size={18} />
+                    Send Message
+                  </span>
                 </button>
               </form>
             )}
@@ -148,8 +138,9 @@ const Contact = () => {
         </div>
       </div>
       
-      <div className="absolute top-1/4 right-0 w-1/3 h-1/2 bg-[#00ff9d]/5 rounded-full blur-3xl -z-10"></div>
-      <div className="absolute bottom-0 left-0 w-1/2 h-1/3 bg-[#00ff9d]/5 rounded-full blur-3xl -z-10"></div>
+      {/* Background decorative elements */}
+      <div className="absolute top-1/4 right-0 w-1/3 h-1/2 bg-accent/5 rounded-full blur-3xl -z-10"></div>
+      <div className="absolute bottom-0 left-0 w-1/2 h-1/3 bg-accent/5 rounded-full blur-3xl -z-10"></div>
     </section>
   );
 };

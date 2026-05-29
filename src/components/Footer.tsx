@@ -1,7 +1,7 @@
 import React from 'react';
 import { Github, Linkedin } from 'lucide-react';
 
-const Footer = () => {
+const Footer: React.FC = () => {
   const currentYear = new Date().getFullYear();
   
   return (
@@ -20,9 +20,9 @@ const Footer = () => {
               >
                 <Linkedin />
               </a>
-              <a 
-                href="https://github.com" 
-                target="_blank" 
+              <a
+                href="https://github.com/reinkaoss"
+                target="_blank"
                 rel="noopener noreferrer"
                 aria-label="GitHub"
               >
