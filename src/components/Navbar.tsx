@@ -1,124 +1,105 @@
-import React, { useState, useEffect } from 'react';
-import { Menu, X, Sun, Moon, Github } from 'lucide-react';
+import { useEffect, useState } from 'react';
+import { Menu, X, Sun, Moon } from 'lucide-react';
 import { useTheme } from '../context/ThemeContext';
 
-const Navbar: React.FC = () => {
-  const [isOpen, setIsOpen] = useState(false);
+const links = [
+  { name: 'Work', href: '#work' },
+  { name: 'Experience', href: '#experience' },
+  { name: 'Skills', href: '#skills' },
+  { name: 'Contact', href: '#contact' },
+];
+
+const Navbar = () => {
+  const [open, setOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
   const { theme, toggleTheme } = useTheme();
 
   useEffect(() => {
-    const handleScroll = () => {
-      if (window.scrollY > 10) {
-        setScrolled(true);
-      } else {
-        setScrolled(false);
-      }
-    };
-
-    window.addEventListener('scroll', handleScroll);
-    return () => window.removeEventListener('scroll', handleScroll);
+    const onScroll = () => setScrolled(window.scrollY > 12);
+    onScroll();
+    window.addEventListener('scroll', onScroll, { passive: true });
+    return () => window.removeEventListener('scroll', onScroll);
   }, []);
 
-  const navLinks = [
-    { name: 'Home', href: '#home' },
-    { name: 'Projects', href: '#projects' },
-    { name: 'Skills', href: '#skills' },
-    { name: 'Contact', href: '#contact' },
-  ];
+  useEffect(() => {
+    document.body.style.overflow = open ? 'hidden' : '';
+    return () => {
+      document.body.style.overflow = '';
+    };
+  }, [open]);
 
   return (
-    <nav 
-      className={`fixed w-full z-20 transition-all duration-300 ${
-        scrolled 
-          ? 'bg-white/90 dark:bg-gray-900/90 backdrop-blur-sm shadow-sm' 
-          : 'bg-transparent'
+    <>
+    <header
+      className={`fixed inset-x-0 top-0 z-40 transition-colors duration-300 ${
+        scrolled || open ? 'bg-paper/85 backdrop-blur-md border-b border-line' : 'bg-transparent'
       }`}
     >
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="flex justify-between h-16 items-center">
-          <div className="flex items-center">
-            <a
-              href="#home"
-              className="text-accent font-bold text-xl flex items-center"
-            >
-              <span className="mr-2">Victor Biscio</span>
-            </a>
-          </div>
-          
-          <div className="hidden md:flex items-center space-x-4">
-            {navLinks.map((link) => (
-              <a
-                key={link.name}
-                href={link.href}
-                className="px-3 py-2 text-gray-700 dark:text-gray-300 hover:text-accent transition-colors duration-300"
-              >
-                {link.name}
-              </a>
-            ))}
+      <div className="mx-auto flex h-16 max-w-page items-center justify-between px-5 sm:px-8">
+        <a href="#home" className="flex items-center gap-2.5 text-ink">
+          <span className="grid h-8 w-8 place-items-center rounded-full border border-line text-xs font-medium tracking-wide">
+            VB
+          </span>
+          <span className="text-sm font-medium tracking-wide">Victor Biscio</span>
+        </a>
 
-            <a href="https://github.com/reinkaoss" target="_blank" rel="noopener noreferrer" className="text-gray-700 dark:text-gray-300 hover:text-accent transition-colors">
-              <Github size={20} />
-            </a>
-            
-            <button 
-              onClick={toggleTheme} 
-              className="p-2 rounded-full bg-gray-200 dark:bg-gray-700 text-gray-700 dark:text-gray-300 hover:bg-gray-300 dark:hover:bg-gray-600 transition-colors"
-              aria-label={theme === 'dark' ? 'Switch to light mode' : 'Switch to dark mode'}
-            >
-              {theme === 'dark' ? <Sun size={18} /> : <Moon size={18} />}
-            </button>
-          </div>
-          
-          <div className="md:hidden flex items-center">
-            <button 
-              onClick={toggleTheme} 
-              className="p-2 rounded-full bg-gray-200 dark:bg-gray-700 text-gray-700 dark:text-gray-300 mr-2"
-              aria-label={theme === 'dark' ? 'Switch to light mode' : 'Switch to dark mode'}
-            >
-              {theme === 'dark' ? <Sun size={18} /> : <Moon size={18} />}
-            </button>
-            
-            <button
-              onClick={() => setIsOpen(!isOpen)}
-              className="text-gray-700 dark:text-gray-300 hover:text-accent"
-              aria-label="Toggle menu"
-            >
-              {isOpen ? <X size={24} /> : <Menu size={24} />}
-            </button>
-          </div>
-        </div>
-      </div>
-      
-      {/* Mobile menu */}
-      <div 
-        className={`md:hidden transition-all duration-300 ease-in-out ${
-          isOpen ? 'max-h-60 opacity-100' : 'max-h-0 opacity-0 invisible'
-        } overflow-hidden bg-white dark:bg-gray-800`}
-      >
-        <div className="px-4 pt-2 pb-3 space-y-1">
-          {navLinks.map((link) => (
+        <nav className="hidden items-center gap-1 md:flex">
+          {links.map((link) => (
             <a
               key={link.name}
               href={link.href}
-              className="block px-3 py-2 rounded-md text-base font-medium text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700 hover:text-accent"
-              onClick={() => setIsOpen(false)}
+              className="rounded-full px-3 py-2 text-sm text-mute transition-colors hover:text-ink"
             >
               {link.name}
             </a>
           ))}
-          <a
-            href="https://github.com/reinkaoss"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="flex items-center px-3 py-2 rounded-md text-base font-medium text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700 hover:text-accent"
-            onClick={() => setIsOpen(false)}
+          <button
+            type="button"
+            onClick={toggleTheme}
+            className="ml-2 grid h-9 w-9 place-items-center rounded-full border border-line text-ink transition-colors hover:border-purple-medium"
+            aria-label={theme === 'dark' ? 'Switch to light mode' : 'Switch to dark mode'}
           >
-            <Github size={20} className="mr-2" /> GitHub
-          </a>
+            {theme === 'dark' ? <Sun size={16} /> : <Moon size={16} />}
+          </button>
+        </nav>
+
+        <div className="flex items-center gap-2 md:hidden">
+          <button
+            type="button"
+            onClick={toggleTheme}
+            className="grid h-10 w-10 place-items-center rounded-full border border-line text-ink"
+            aria-label={theme === 'dark' ? 'Switch to light mode' : 'Switch to dark mode'}
+          >
+            {theme === 'dark' ? <Sun size={16} /> : <Moon size={16} />}
+          </button>
+          <button
+            type="button"
+            onClick={() => setOpen((value) => !value)}
+            className="grid h-10 w-10 place-items-center rounded-full border border-line text-ink"
+            aria-expanded={open}
+            aria-label={open ? 'Close menu' : 'Open menu'}
+          >
+            {open ? <X size={18} /> : <Menu size={18} />}
+          </button>
         </div>
       </div>
-    </nav>
+
+    </header>
+    {open && (
+      <nav className="fixed inset-0 z-30 overflow-y-auto bg-paper px-5 pb-10 pt-24 md:hidden">
+        {links.map((link) => (
+          <a
+            key={link.name}
+            href={link.href}
+            onClick={() => setOpen(false)}
+            className="block border-b border-line py-4 font-display text-4xl text-ink"
+          >
+            {link.name}
+          </a>
+        ))}
+      </nav>
+    )}
+    </>
   );
 };
 

@@ -1,47 +1,67 @@
-import React from 'react';
-import { Mail, FileText } from 'lucide-react';
+import { ArrowDownRight } from 'lucide-react';
+import Scene from './Scene';
 
-const Hero: React.FC = () => {
+const Hero = () => {
   return (
-    <section id="home" className="min-h-screen flex items-center relative overflow-hidden hero-gradient">
-      <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-20 md:py-28">
-        <div className="max-w-3xl animate-fade-up">
-          <div className="text-accent text-lg mb-5 font-mono">Hi, I'm</div>
-          <h1 className="text-4xl sm:text-5xl md:text-6xl font-bold text-gray-900 dark:text-gray-100 mb-6">
-            Victor Biscio
+    <section id="home" className="relative min-h-[100svh] overflow-hidden">
+      <div className="mx-auto grid min-h-[100svh] max-w-page items-center gap-8 px-5 pb-16 pt-28 sm:px-8 lg:grid-cols-12 lg:gap-6 lg:pb-20 lg:pt-24">
+        <div className="relative z-10 lg:col-span-6">
+          <p className="mb-6 text-xs font-medium uppercase tracking-[0.22em] text-mute">
+            London · Digital operations
+          </p>
+          <h1 className="font-display text-[clamp(3.4rem,11vw,6.6rem)] font-medium leading-[0.9] tracking-[-0.03em] text-ink">
+            Victor
+            <span className="block italic text-purple-medium">Biscio</span>
           </h1>
-          <h2 className="text-2xl sm:text-3xl md:text-4xl text-gray-600 dark:text-gray-400 mb-8">
-            Digital Operations Manager
-          </h2>
-          <div className="text-gray-600 dark:text-gray-400 text-lg mb-10 leading-relaxed space-y-4">
-            <p>
-              Experienced digital operations executive with a track record in agile environments across the
-              events and technology-services sectors. I work at the intersection of operations and engineering &mdash;
-              turning manual workflows into reliable automation.
-            </p>
-            <p>
-              I build process automations in Python (Selenium, Playwright, WebDriver) and connect systems with
-              Zapier, Make.com, and Google Apps Script. Comfortable across the front-end stack (HTML5, CSS3,
-              JavaScript, jQuery, Bootstrap, React, Node.js), with hands-on hardware-troubleshooting experience.
-              Fluent in Portuguese and English.
-            </p>
+          <p className="mt-6 max-w-md text-lg leading-relaxed text-mute sm:text-xl">
+            I connect the tools a team already uses, automate the repetitive parts, and build the
+            interface when a spreadsheet is no longer enough.
+          </p>
+          <div className="mt-8 flex flex-col gap-3 sm:flex-row">
+            <a
+              href="#work"
+              className="inline-flex items-center justify-center gap-2 rounded-full bg-purple-medium px-5 py-3 text-sm font-medium text-white transition-opacity hover:opacity-90"
+            >
+              Selected work
+              <ArrowDownRight size={16} />
+            </a>
+            <a
+              href="#contact"
+              className="inline-flex items-center justify-center rounded-full border border-line px-5 py-3 text-sm font-medium text-ink transition-colors hover:border-purple-medium"
+            >
+              Get in touch
+            </a>
           </div>
+          <dl className="mt-12 grid max-w-lg grid-cols-3 gap-4 border-t border-line pt-6 text-sm">
+            <div>
+              <dt className="text-xs uppercase tracking-wider text-mute">Now</dt>
+              <dd className="mt-1 text-ink">Higherin</dd>
+            </div>
+            <div>
+              <dt className="text-xs uppercase tracking-wider text-mute">Focus</dt>
+              <dd className="mt-1 text-ink">Automation, AI, & web development</dd>
+            </div>
+            <div>
+              <dt className="text-xs uppercase tracking-wider text-mute">Languages</dt>
+              <dd className="mt-1 text-ink">EN / PT</dd>
+            </div>
+          </dl>
+        </div>
 
-          <div className="flex flex-wrap gap-4">
-            <a href="#projects" className="primary-btn">
-              <FileText className="mr-2 h-5 w-5" />
-              View Projects
-            </a>
-            <a href="#contact" className="secondary-btn">
-              <Mail className="mr-2 h-5 w-5" />
-              Contact Me
-            </a>
+        <div className="relative z-0 lg:col-span-6">
+          <div className="relative h-[58vw] min-h-[280px] max-h-[520px] lg:h-[min(72vh,620px)] lg:max-h-none">
+            <div
+              aria-hidden
+              className="pointer-events-none absolute left-1/2 top-1/2 h-[70%] w-[70%] -translate-x-1/2 -translate-y-1/2 rounded-full bg-[color-mix(in_srgb,var(--color-purple-medium)_28%,transparent)] blur-3xl"
+            />
+            <div className="pointer-events-none absolute -inset-10 [mask-image:radial-gradient(ellipse_at_center,black_46%,transparent_74%)] lg:pointer-events-auto lg:-inset-16">
+              <Scene />
+            </div>
+            <p className="pointer-events-none absolute bottom-2 left-0 right-0 hidden text-center text-xs text-mute lg:block">
+              Move the cursor across the sculpture. It leans with you.
+            </p>
           </div>
         </div>
-      </div>
-
-      <div className="absolute top-0 right-0 w-1/2 h-full opacity-20 pointer-events-none">
-        <div className="absolute inset-0 bg-gradient-to-bl from-accent/20 to-transparent"></div>
       </div>
     </section>
   );
