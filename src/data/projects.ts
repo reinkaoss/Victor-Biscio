@@ -13,8 +13,8 @@ export interface Project {
   stack: string[];
   image: string;
   imageAlt: string;
-  github: string;
   demo?: string;
+  github?: string;
   phone?: boolean;
 }
 
@@ -74,7 +74,6 @@ export const projects: Project[] = [
     stack: ['React', 'Vite', 'Supabase'],
     image: timesheetImage,
     imageAlt: 'Timetrack reports dashboard with submission totals, hours, and pay',
-    github: 'https://github.com/reinkaoss/timesheet-platform',
   },
   {
     title: 'Violin Reader',
@@ -100,7 +99,7 @@ export const projects: Project[] = [
       },
     ],
     stack: ['HTML', 'CSS', 'JavaScript'],
-    image: '/projects/violin-reader.png',
+    image: '/projects/violin-reader-practice.png',
     imageAlt: 'Violin Reader practice screen with a staff, string buttons, and finger choices',
     demo: 'https://musicsheets.netlify.app/',
     github: 'https://github.com/reinkaoss/music_sheet',
@@ -162,5 +161,34 @@ export const projects: Project[] = [
     imageAlt: 'Ambassador Console dashboard with timesheets, expenses, and hours by campaign',
     demo: 'https://community-management-demo.netlify.app/',
     github: 'https://github.com/reinkaoss/hub_demo',
+  },
+  {
+    title: 'Job Listings Scraper',
+    summary:
+      'Turns job ads into structured listings you can review, edit, and export.',
+    body: 'Paste public job URLs, or upload a description file. Each posting comes back as a card with the title, company, salary, and description.',
+    features: [
+      {
+        title: 'URL scraper',
+        text: 'Paste comma-separated job links and fetch them together.',
+      },
+      {
+        title: 'File extractor',
+        text: 'Upload a .docx, .pdf, .txt, or markdown file.',
+      },
+      {
+        title: 'Review',
+        text: 'Correct any field, including a bulk edit on a selection.',
+      },
+      {
+        title: 'Export',
+        text: 'Download JSON, or generate a self-contained job-page URL.',
+      },
+    ],
+    stack: ['React', 'Python', 'Flask'],
+    image: '/projects/job-scraper.png',
+    imageAlt: 'Job Listings Scraper with a field for comma-separated job URLs',
+    demo: 'https://python-job-scraper.netlify.app/',
+    github: 'https://github.com/reinkaoss/Python-job-scraper',
   },
 ];

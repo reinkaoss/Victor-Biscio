@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react';
 import { Menu, X, Sun, Moon } from 'lucide-react';
 import { useTheme } from '../context/ThemeContext';
+import Dock from './Dock';
 
 const links = [
   { name: 'Work', href: '#work' },
@@ -99,6 +100,7 @@ const Navbar = () => {
         ))}
       </nav>
     )}
+    <Dock hidden={open} />
     </>
   );
 };
