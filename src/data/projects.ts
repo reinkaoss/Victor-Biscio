@@ -1,5 +1,3 @@
-import timesheetImage from '../imgs/Screenshot 2025-07-07 at 18.10.44.png';
-
 export interface ProjectFeature {
   title: string;
   text: string;
@@ -23,7 +21,7 @@ export const projects: Project[] = [
     title: 'Office Attendance',
     summary:
       'A workplace app for planning who is in the office. People mark their days, see colleagues on the same ones, vote as a team, and admins keep an eye on the week.',
-    body: 'The live product signs people in with Slack and stores attendance in Supabase. The public demo opens straight in as a super-admin on sample data, so the calendar, vote, and admin views can be browsed with nothing saved.',
+    body: 'The production app signs people in with Slack and stores attendance in Supabase. The public demo drops you into a super-admin session on fictional sample data, so the calendar, vote, and admin views can be browsed with nothing saved.',
     features: [
       {
         title: 'Week calendar',
@@ -44,36 +42,38 @@ export const projects: Project[] = [
     ],
     stack: ['React', 'Vite', 'Supabase', 'Slack'],
     image: '/projects/office-attendance.png',
-    imageAlt: 'Office Attendance calendar, showing who is in across September and October',
+    imageAlt: 'Office Attendance month calendar with colleagues marked in on each day',
     demo: 'https://office-attendance-demo.netlify.app/',
     github: 'https://github.com/reinkaoss/office-atendance-demo',
   },
   {
-    title: 'Timesheet',
+    title: 'Pixel Animator',
     summary:
-      'A reports dashboard for brand-ambassador timesheets. Filter by person, campaign, and status, then read hours, pay, and bonuses in one place.',
-    body: 'Built for Higherin as Timetrack. The reports view covers submissions, expenses, and an overview, with exports for the people who need the numbers outside the app.',
+      'A browser-based editor for drawing and animating pixel sprites. Paint on a zoomable grid, stack layers, step through frames, and export PNGs — with automatic saves in local storage.',
+    body: 'Dark-theme UI built for long sessions, with purple-medium accents and shared design tokens across panels. Select, mirror, bones, onion skin, and ComfyUI generation are stubbed in the interface; pen, fill, eraser, layers, timeline playback, and import/export are live today.',
     features: [
       {
-        title: 'Reports',
-        text: 'Submissions, pending, approved, hours, pay, and bonuses on one dashboard.',
+        title: 'Draw',
+        text: 'Pen, fill, and eraser on a grid from 100% to 3200% zoom, with a checkerboard for transparency.',
       },
       {
-        title: 'Filters',
-        text: 'Narrow by ambassador, campaign, period, and status.',
+        title: 'Layers & colour',
+        text: 'Per-layer visibility and opacity, plus a 16-colour starter palette and hex picker.',
       },
       {
-        title: 'Expenses',
-        text: 'Timesheets, expenses, and overview sit in the same report.',
+        title: 'Animate',
+        text: 'Frame timeline with thumbnails, add/duplicate/delete, playback, and FPS control.',
       },
       {
-        title: 'Export',
-        text: 'Download a PDF or CSV, and sync the underlying data.',
+        title: 'Import & organise',
+        text: 'Import from file or URL, export PNG, and group sprites as characters or objects in the sidebar.',
       },
     ],
-    stack: ['React', 'Vite', 'Supabase'],
-    image: timesheetImage,
-    imageAlt: 'Timetrack reports dashboard with submission totals, hours, and pay',
+    stack: ['Next.js', 'React', 'TypeScript', 'Konva', 'Tailwind CSS', 'Zustand'],
+    image: '/projects/pixel-craft.png',
+    imageAlt: 'Pixel Animator editor with a wizard sprite on the canvas, frame timeline, layers, and colour panel',
+    demo: 'https://pixel-smithy.netlify.app/',
+    github: 'https://github.com/reinkaoss/pixel-craft',
   },
   {
     title: 'Violin Reader',

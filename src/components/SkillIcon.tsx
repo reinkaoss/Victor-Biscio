@@ -1,4 +1,5 @@
 import type { Skill } from '../data/skills';
+import { getSkillBrand, skillTileLabel } from '../lib/skillBrand';
 import html5 from 'simple-icons/icons/html5.svg?raw';
 import css from 'simple-icons/icons/css.svg?raw';
 import javascript from 'simple-icons/icons/javascript.svg?raw';
@@ -30,6 +31,8 @@ import grpc from '../icons/grpc.svg?raw';
 import premiere from '../icons/premiere.svg?raw';
 import photoshop from '../icons/photoshop.svg?raw';
 import apple from 'simple-icons/icons/apple.svg?raw';
+import webhooks from '../icons/webhooks.svg?raw';
+import dotdigitalSymbol from '../icons/dotdigital-symbol.png';
 
 const icons: Record<string, string> = {
   html5,
@@ -63,11 +66,97 @@ const icons: Record<string, string> = {
   premiere,
   photoshop,
   apple,
+  webhooks,
 };
 
-const SkillIcon = ({ skill }: { skill: Skill }) => {
+type SkillIconProps = {
+  skill: Skill;
+  variant?: 'inline' | 'tile';
+};
+
+const TileMark = ({
+  label,
+  tileHex,
+  foreground,
+}: {
+  label: string;
+  tileHex: string;
+  foreground: string;
+}) => (
+  <span
+    aria-hidden
+    className="relative grid h-full w-full place-items-center overflow-hidden rounded-2xl"
+    style={{ backgroundColor: `#${tileHex}`, color: foreground }}
+  >
+    <span
+      className="pointer-events-none absolute inset-0 opacity-25"
+      style={{
+        background: `radial-gradient(circle at 30% 20%, #ffffff 0%, transparent 55%)`,
+      }}
+    />
+    <span className="relative font-bold tracking-tight" style={{ fontSize: label.length > 3 ? '0.62rem' : '0.78rem' }}>
+      {label}
+    </span>
+  </span>
+);
+
+const SkillIcon = ({ skill, variant = 'inline' }: SkillIconProps) => {
   const svg = skill.icon ? icons[skill.icon] : undefined;
   const wide = skill.icon === 'grpc';
+
+  if (variant === 'tile') {
+    const brand = getSkillBrand(skill);
+    const label = skillTileLabel(skill);
+
+    if (brand.mode === 'mark') {
+      return <TileMark label={label} tileHex={brand.tileHex} foreground={brand.foreground} />;
+    }
+
+    if (brand.mode === 'raster' && brand.raster) {
+      return (
+        <span
+          aria-hidden
+          className="grid h-full w-full place-items-center rounded-2xl p-2"
+          style={{ backgroundColor: `#${brand.tileHex}` }}
+        >
+          <img src={brand.raster} alt="" className="h-[78%] w-[78%] object-contain" draggable={false} />
+        </span>
+      );
+    }
+
+    if (brand.mode === 'multicolor') {
+      const fullBleed = skill.icon === 'premiere' || skill.icon === 'photoshop';
+      return (
+        <span
+          aria-hidden
+          className={`grid h-full w-full place-items-center overflow-hidden rounded-2xl ${
+            fullBleed ? 'p-0 [&_svg]:h-full [&_svg]:w-full' : 'p-1.5 [&_svg]:h-full [&_svg]:w-full'
+          } ${brand.wide && !fullBleed ? '[&_svg]:h-[88%] [&_svg]:w-[88%]' : ''}`}
+          style={{ backgroundColor: `#${brand.tileHex}` }}
+          dangerouslySetInnerHTML={{ __html: brand.markup }}
+        />
+      );
+    }
+
+    return (
+      <span
+        aria-hidden
+        className={`grid h-full w-full place-items-center rounded-2xl p-2.5 ${
+          brand.wide ? '[&_svg]:h-5 [&_svg]:w-9' : '[&_svg]:h-[58%] [&_svg]:w-[58%]'
+        }`}
+        style={{ backgroundColor: `#${brand.tileHex}` }}
+        dangerouslySetInnerHTML={{ __html: brand.markup }}
+      />
+    );
+  }
+
+  if (skill.icon === 'dotdigital') {
+    return (
+      <span aria-hidden className="grid h-6 w-8 shrink-0 place-items-center rounded-md bg-[#fefbec]">
+        <img src={dotdigitalSymbol} alt="" className="h-4 w-4 object-contain" draggable={false} />
+      </span>
+    );
+  }
 
   if (!svg) {
     return (

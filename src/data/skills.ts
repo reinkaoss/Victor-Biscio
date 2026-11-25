@@ -47,16 +47,16 @@ export const skillGroups: SkillGroup[] = [
     note: 'Integrations, models, and measurement',
     items: [
       { name: 'REST APIs', mark: 'API' },
-      { name: 'Webhooks', mark: 'WH' },
+      { name: 'Webhooks', icon: 'webhooks' },
       { name: 'MCP', icon: 'mcp' },
-      { name: 'LLMs', mark: 'LLM' },
+      { name: 'LLMs', mark: 'AI' },
       { name: 'RAG', mark: 'RAG' },
       { name: 'Node.js', icon: 'nodedotjs' },
       { name: 'MySQL', icon: 'mysql' },
       { name: 'Supabase', icon: 'supabase' },
       { name: 'Google Analytics', icon: 'googleanalytics' },
       { name: 'Google Ads', icon: 'googleads' },
-      { name: 'Dotdigital', mark: 'Dd' },
+      { name: 'Dotdigital', icon: 'dotdigital' },
       { name: 'HTML email', mark: 'EM' },
     ],
   },
@@ -79,4 +79,26 @@ export const alsoSkills: Skill[] = [
   { name: 'Apple hardware & MDM', icon: 'apple' },
 ];
 
-export const languages = ['Portuguese', 'English'];
+export interface SkillTile {
+  id: string;
+  skill: Skill;
+  group: string;
+  groupNote: string;
+}
+
+export const skillTiles: SkillTile[] = [
+  ...skillGroups.flatMap((group) =>
+    group.items.map((item) => ({
+      id: `${group.title}-${item.name}`,
+      skill: item,
+      group: group.title,
+      groupNote: group.note,
+    })),
+  ),
+  ...alsoSkills.map((item) => ({
+    id: `also-${item.name}`,
+    skill: item,
+    group: 'Also',
+    groupNote: 'Beyond code',
+  })),
+];

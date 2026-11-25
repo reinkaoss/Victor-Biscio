@@ -31,6 +31,39 @@ html {
   }
 }
 
+@keyframes skill-tile-float {
+  0%,
+  100% {
+    transform: translate(0, 0) rotate(var(--tile-rotate, 0deg));
+  }
+  25% {
+    transform: translate(calc(var(--drift-x, 6px) * 0.55), calc(var(--drift-y, 5px) * -0.75))
+      rotate(calc(var(--tile-rotate, 0deg) + var(--float-sway, 3deg)));
+  }
+  50% {
+    transform: translate(var(--drift-x, 6px), var(--drift-y, 5px))
+      rotate(calc(var(--tile-rotate, 0deg) + calc(var(--float-sway, 3deg) * -1)));
+  }
+  75% {
+    transform: translate(calc(var(--drift-x, 6px) * -0.45), calc(var(--drift-y, 5px) * 0.85))
+      rotate(calc(var(--tile-rotate, 0deg) + calc(var(--float-sway, 3deg) * 0.6)));
+  }
+}
+
+.skill-tile-float {
+  animation: skill-tile-float var(--float-duration, 4.5s) ease-in-out infinite;
+  animation-delay: var(--float-delay, 0s);
+  will-change: transform;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .skill-tile-float {
+    animation: none;
+    transform: rotate(var(--tile-rotate, 0deg));
+    will-change: auto;
+  }
+}
+
 section[id] {
   scroll-margin-top: 5.5rem;
 }

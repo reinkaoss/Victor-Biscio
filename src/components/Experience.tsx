@@ -9,7 +9,7 @@ const Experience = () => {
           Professional experience
         </h2>
         <p className="mt-4 max-w-2xl text-sm leading-relaxed text-mute">
-          From hospitality and teaching into digital operations. The recent work is automation,
+          From teaching into digital operations. The recent work is automation,
           integrations, and the internal tools that sit on top of them.
         </p>
 
