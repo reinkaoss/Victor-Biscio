@@ -191,4 +191,33 @@ export const projects: Project[] = [
     demo: 'https://python-job-scraper.netlify.app/',
     github: 'https://github.com/reinkaoss/Python-job-scraper',
   },
+  {
+    title: 'Pokébot',
+    summary:
+      'An offline Pokédex you can talk to. Ask about a species, a move, or a type, and the answer shows up next to an ASCII portrait.',
+    body: 'The data ships with the app, so it runs with no internet connection. The public demo answers from the Pokédex itself. A local model is optional, and only makes the replies more conversational.',
+    features: [
+      {
+        title: 'Chat',
+        text: 'Ask what Gengar is weak to, or whether Snorlax can learn Surf. Follow-ups keep the last Pokémon in mind.',
+      },
+      {
+        title: 'Scope',
+        text: 'An ASCII portrait and stat card of the Pokémon you just asked about, including alternate forms.',
+      },
+      {
+        title: 'Evolution',
+        text: 'Play a family as a scene, from the egg through each stage, and pick when there is more than one path.',
+      },
+      {
+        title: 'Arena',
+        text: 'Run a 1v1 as an ASCII battle, with HP bars, a log, and win odds.',
+      },
+    ],
+    stack: ['Python', 'SQLite', 'JavaScript'],
+    image: '/projects/poke-ascii.png',
+    imageAlt: 'Pokébot showing an ASCII portrait of Eevee beside a Pokédex answer',
+    demo: 'https://poke-ascii.onrender.com/',
+    github: 'https://github.com/reinkaoss/poke-ascii',
+  },
 ];
